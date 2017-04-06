@@ -3,6 +3,6 @@ module.exports = function(robot) {
 
   robot.hear(/(.*)/, function(msg) {
     console.log(msg.match[1]);
-    console.log(msg.user);
+    console.log(msg);
   });
 }
