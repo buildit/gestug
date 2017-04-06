@@ -2,10 +2,10 @@ module.exports = function(robot) {
 
   robot.hear(/A color was added to the (.*) design library/, function(res) {
     if (res.message.user.name == 'Brand.ai') {
-      response.send('I heard you, Brand.ai!');
+      res.send('I heard you, Brand.ai!');
     }
     else {
-      response.send('You can\'t trick me!');
+      res.send('You can\'t trick me!');
     }
 
   });
