@@ -11,9 +11,9 @@ module.exports = function(robot) {
     }
   }
 
-  robot.hear(/The color .* was changed in the (.*) design library/, kickoffBrandaiUpdate);
-  robot.hear(/A color was added to the (.*) design library/, kickoffBrandaiUpdate);
-  robot.hear(/The font family .* was added to the (.*) design library/, kickoffBrandaiUpdate);
+  robot.hear(/The color .? was changed in the (.?) design library/, kickoffBrandaiUpdate);
+  robot.hear(/A color was added to the (.?) design library/, kickoffBrandaiUpdate);
+  robot.hear(/The font family .? was added to the (.?) design library/, kickoffBrandaiUpdate);
   robot.hear(/yo/, function(msg) { msg.send('Yo') });
 
   robot.hear(/(.*)/, function(msg) {
