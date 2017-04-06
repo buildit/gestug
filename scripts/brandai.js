@@ -1,3 +1,3 @@
-module.exports = robot => {
-  robot.hear(/yo/, msg => msg.send('Yo'))
+module.exports = function(robot) {
+  robot.hear(/yo/, function(msg) => { msg.send('Yo') });
 }
