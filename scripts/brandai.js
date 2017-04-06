@@ -1,6 +1,7 @@
 module.exports = function(robot) {
 
   var kickoffBrandaiUpdate = function(res) {
+    console.log('in this');
     res.send('The design library I detected was ' + msg.match[1]);
     if (res.message.user.name == 'Brand.ai') {
       res.send('I heard you, Brand.ai!');
