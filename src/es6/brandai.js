@@ -24,4 +24,5 @@ const setupRobot = robot => {
   robot.respond(/kickoff brandai/, kickoffManualBrandaiUpdate)
 
 }
-export default setupRobot;
+
+module.exports = setupRobot;
