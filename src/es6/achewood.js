@@ -96,4 +96,4 @@ const setupRobot = robot => {
 
 };
 
-export default setupRobot;
+module.exports = setupRobot;

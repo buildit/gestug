@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  context: path.resolve(__dirname, './src/scripts'),
+  context: path.resolve(__dirname, './src/es6'),
   entry: {
     achewood: './achewood.js',
   },
