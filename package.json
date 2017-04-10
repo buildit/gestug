@@ -5,6 +5,9 @@
   "author": "Peter Monks <walter.monks@wipro.comx>",
   "description": "A bot that gets yelled at by brandai",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
     "htmlparser": "^1.7.7",
     "hubot": "^2.19.0",
     "hubot-diagnostics": "0.0.1",
@@ -20,10 +23,13 @@
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^4.3.4",
-    "soupselect": "^0.2.0"
+    "soupselect": "^0.2.0",
+    "webpack": "^2.3.3"
   },
   "engines": {
     "node": "0.10.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-dev-server": "^2.4.2"
+  }
 }
