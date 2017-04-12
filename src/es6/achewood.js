@@ -25,7 +25,7 @@ import select from 'cheerio-select';
 import requisition from 'requisition';
 
 const setupRobot = robot => {
-  const ohnorobot = async term => {
+  const ohnorobot = async (term) => {
     const url = !term
       ? 'http://www.ohnorobot.com/random.php?comic=636'
       : `http://www.ohnorobot.com/index.php?comic=636&lucky=1&s=${term}`;
@@ -49,7 +49,7 @@ const setupRobot = robot => {
       image: `http://achewood.com${comic.src}#.png`,
       title: comic.title,
     };
-  }
+  };
 
   const lookupAchewood = async (requested) => {
     let response;
@@ -77,10 +77,9 @@ const setupRobot = robot => {
   };
 
   const dateRegex = /achewood\s?((?:0[1-9]|1[0-2]).?(?:0[1-9]|[1-2][0-9]|3[0-1]).?(?:20\d{2})$|.*)?/i;
-  robot.respond(dateRegex, async res => {
+  robot.respond(dateRegex, res => {
     const requested = res.match[1];
-    const comic = await lookupAchewood(requested);
-    emitComic(res, comic.image, comic.title);
+    lookupAchewood(requested).then(comic => emitComic(res, comic.image, comic.title));
   });
 
   const saddestList = ['06022003', '11052001', '09052006', '07302007', '12102001'];

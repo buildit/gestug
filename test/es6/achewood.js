@@ -1,20 +1,19 @@
 import Helper from 'hubot-test-helper';
 
+import nock from 'nock';
+
 import mocha from 'mocha';
 import coMocha from 'co-mocha';
-coMocha(mocha);
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-chai.use(chaiAsPromised);
 
+coMocha(mocha);
+chai.use(chaiAsPromised);
 chai.should();
 const expect = chai.expect;
 
-import nock from 'nock';
-
 const helper = new Helper('../../src/es6/achewood.js');
-import setupRobot from '../../src/es6/achewood';
 
 const achewoodUrl = 'http://achewood.com';
 const achewoodData = (date, title) => ({
@@ -32,44 +31,38 @@ const achewoodSearch = achewoodData('01012016', 'This is the search strip');
 const achewoodDate = achewoodData('10012001', 'This is the date lookup');
 const achewoodRandom = achewoodData('01252006', 'This is a random strip');
 
-const achewoodSrc = '/comic.php?date=09052006';
-const achewoodTitle = 'This is the title of an Achewood comic';
-const achewoodSrcFQ = 'http://achewood.com/comic.php?date=09052006#.png';
 const achewoodSearchTerm = 'foo';
-
 
 describe('Achewood plugin', () => {
   let room;
-  let achewood;
-  let ohnorandom;
   beforeEach(() => {
     room = helper.createRoom();
 
-    achewood = nock(achewoodUrl)
+    nock(achewoodUrl)
       .get('/').reply(200, achewoodBody(achewoodLatest))
       .get('/index.php')
-      .query({date: /06022003|11052001|09052006|07302007|12102001/})
+      .query({ date: /06022003|11052001|09052006|07302007|12102001/ })
       .reply(200, achewoodBody(achewoodSaddest))
       .get('/index.php')
-      .query({date: achewoodRandom.date})
+      .query({ date: achewoodRandom.date })
       .reply(200, achewoodBody(achewoodRandom))
       .get('/index.php')
-      .query({date: achewoodDate.date})
+      .query({ date: achewoodDate.date })
       .reply(200, achewoodBody(achewoodDate))
       .get('/index.php')
-      .query({date: achewoodSearch.date})
-      .reply(200, achewoodBody(achewoodSearch))
+      .query({ date: achewoodSearch.date })
+      .reply(200, achewoodBody(achewoodSearch));
 
-    ohnorandom = nock('http://www.ohnorobot.com')
+    nock('http://www.ohnorobot.com')
       .get('/random.php?comic=636')
       .delay(0)
       .reply(302, '', {
-          'Location': `${achewoodUrl}/index.php?date=${achewoodRandom.date}`
+        Location: `${achewoodUrl}/index.php?date=${achewoodRandom.date}`,
       })
       .get(`/index.php?comic=636&lucky=1&s=${achewoodSearchTerm}`)
       .delay(0)
       .reply(302, '', {
-          'Location': `${achewoodUrl}/index.php?date=${achewoodSearch.date}`
+        Location: `${achewoodUrl}/index.php?date=${achewoodSearch.date}`,
       });
   });
   afterEach(() => {
