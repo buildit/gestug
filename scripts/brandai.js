@@ -3,7 +3,7 @@
 var BRANDAI_INTEGRATION_USER_NAME = 'Brand.ai';
 var kickoffBrandaiUpdate = function kickoffBrandaiUpdate(res) {
   res.send('I detected a change in design library ' + res.match[1] + '.  Kicking off updates.');
-  if (res.message.user.name == BRANDAI_INTEGRATION_USER_NAME) {
+  if (res.message.user.name === BRANDAI_INTEGRATION_USER_NAME) {
     res.send('I heard you, Brand.ai!');
   } else {
     res.send('You can\'t trick me, you\'re not a bot!');
