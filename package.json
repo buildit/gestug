@@ -7,8 +7,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src/es6 --out-dir scripts",
     "lint": "./node_modules/.bin/eslint 'src/es6/**/*.js' 'test/**/*'",
-    "test": "nyc ./node_modules/.bin/mocha --timeout 60000 --compilers js:babel-core/register --require babel-polyfill --require coffee-script/register test/es6",
-    "test:ci": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require babel-polyfill --reporter mocha-jenkins-reporter -O junit_report_path=./reports/test-results.xml,junit_report_name=\"Tests Results\",junit_report_stack=1 test/unit"
+    "test": "nyc ./node_modules/.bin/mocha --timeout 60000 --compilers js:babel-core/register --require babel-polyfill --require coffee-script/register test/es6"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -57,5 +56,12 @@
   "engines": {
     "node": "0.10.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint",
+    "test",
+    "build"
+  ]
 }

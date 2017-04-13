@@ -36,11 +36,9 @@ var setupRobot = function setupRobot(robot) {
 
             case 3:
               response = _context.sent;
-
-              console.log(response.response.redirects[0]);
               return _context.abrupt('return', response.response.redirects[0]);
 
-            case 6:
+            case 5:
             case 'end':
               return _context.stop();
           }
@@ -187,34 +185,12 @@ var setupRobot = function setupRobot(robot) {
   };
 
   var dateRegex = /achewood\s?((?:0[1-9]|1[0-2]).?(?:0[1-9]|[1-2][0-9]|3[0-1]).?(?:20\d{2})$|.*)?/i;
-  robot.respond(dateRegex, function () {
-    var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(res) {
-      var requested, comic;
-      return _regenerator2.default.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              requested = res.match[1];
-              _context4.next = 3;
-              return lookupAchewood(requested);
-
-            case 3:
-              comic = _context4.sent;
-
-              emitComic(res, comic.image, comic.title);
-
-            case 5:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }());
+  robot.respond(dateRegex, function (res) {
+    var requested = res.match[1];
+    lookupAchewood(requested).then(function (comic) {
+      return emitComic(res, comic.image, comic.title);
+    });
+  });
 
   var saddestList = ['06022003', '11052001', '09052006', '07302007', '12102001'];
   robot.respond(/.*saddest thing\?*/i, function (res) {
