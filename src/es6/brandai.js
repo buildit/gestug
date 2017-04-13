@@ -26,6 +26,7 @@ const kickoffManualBrandaiUpdate = res => {
 const setupRobot = robot => {
   robot.hear(/The color .* was changed in the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/A color was added to the (.*) design library/, kickoffBrandaiUpdate);
+  robot.hear(/A color was changed in the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/The font family .* was added to the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/The (logo|icon|image) .* was added to the (.*) design library/, kickoffBrandaiUpdate);
 
