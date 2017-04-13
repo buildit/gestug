@@ -8,6 +8,7 @@ var BRANDAI_INTEGRATION_USER_NAME = 'Brand.ai';
 //   requisition.post('https://circleci.com/api/v1.1/project/github/buildit/gestug/tree/master?circle-token=efbf867e30b8f5cc8d4de6621c0adfa2a32c7716')
 // }
 var kickoffBrandaiUpdate = function kickoffBrandaiUpdate(res) {
+  // room G4W67C7E2
   res.send('I am in the ' + res.message.room + ' room');
   res.send('I detected a change in design library ' + res.match[1] + '.  Kicking off updates.');
   if (res.message.user.name === BRANDAI_INTEGRATION_USER_NAME) {
@@ -29,6 +30,7 @@ var setupRobot = function setupRobot(robot) {
   robot.hear(/The color .* was changed in the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/A color was added to the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/A color was changed in the (.*) design library/, kickoffBrandaiUpdate);
+  robot.hear(/A color was removed from the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/The font family .* was added to the (.*) design library/, kickoffBrandaiUpdate);
   robot.hear(/The (logo|icon|image) .* was added to the (.*) design library/, kickoffBrandaiUpdate);
 
